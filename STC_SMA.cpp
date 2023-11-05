@@ -4,16 +4,20 @@
 
 //простая реализация
 void SMA(std::vector<float> data, int n) {
-    if (n > data.size()) {
+    if (n > data.size())
         return;
-    }
     int t = n - 1;
+    float avg = 0;
+    float sum = 0;
+    for (int i = t; i > t - n; i--) {
+        sum += data[i];
+    }
+    avg = sum / n;
+    std::cout << avg << std::endl;
+    t++;
     while (t < data.size()) {
-        float sum = 0;
-        for (int i = t; i > t - n; i--) {
-            sum += data[i];
-        }
-        std::cout << sum / n << std::endl;
+        avg = avg + (data[t] - data[t - n]) / n;
+        std::cout << avg << std::endl;
         t++;
     }
 }
