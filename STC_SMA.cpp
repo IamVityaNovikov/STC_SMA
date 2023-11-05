@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 
-//простая реализация
 void SMA(std::vector<float> data, int n) {
     if (n > data.size())
         return;
