@@ -2,12 +2,13 @@
 #include <iostream>
 #include <vector>
 
-void SMA(std::vector<float> data, int n) {
+template<typename T>
+void SMA(std::vector<T> data, int n) {
     if (n > data.size())
         return;
     int t = n - 1;
-    float avg = 0;
-    float sum = 0;
+    T avg = 0;
+    T sum = 0;
     for (int i = t; i > t - n; i--) {
         sum += data[i];
     }
@@ -23,6 +24,6 @@ void SMA(std::vector<float> data, int n) {
 
 int main()
 {
-    std::vector<float> data{ 1, 4, 3, 5, 2, 8, 11 };
+    std::vector<double> data{ 1, 4, 3, 5, 2, 8, 11 };
     SMA(data, 3);
 }
