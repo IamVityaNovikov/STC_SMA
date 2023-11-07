@@ -39,16 +39,16 @@ int main()
     std::vector<double> dataDouble;
 
     // Чтение значений double из файла
-    std::ifstream floarFile("float1000000.bin", std::ios::binary);
+    std::ifstream floatFile("float1000000.bin", std::ios::binary);
     int sampleSize;
     float floatBuffer;
-    floarFile.read(reinterpret_cast<char*>(&sampleSize), sizeof(int));
+    floatFile.read(reinterpret_cast<char*>(&sampleSize), sizeof(int));
     for (size_t i = 0; i < sampleSize; i++) {
-        floarFile.read(reinterpret_cast<char*>(&floatBuffer), sizeof(float));
+        floatFile.read(reinterpret_cast<char*>(&floatBuffer), sizeof(float));
 
         dataFloat.push_back(floatBuffer);
     }
-    floarFile.close();
+    floatFile.close();
 
     //увеличение размера исходных данных float в 100 раз
     std::vector<float> tempFloat;
@@ -103,7 +103,8 @@ int main()
     auto float64res = (end_time - start_time) / std::chrono::milliseconds(1);
     
     start_time = std::chrono::high_resolution_clock::now();
-    std::vector<float> float128SMA = SMA(dataFloat, 128); end_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float128SMA = SMA(dataFloat, 128); 
+    end_time = std::chrono::high_resolution_clock::now();
     auto float128res = (end_time - start_time) / std::chrono::milliseconds(1);
     std::cout << std::endl;
 
