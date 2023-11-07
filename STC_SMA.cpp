@@ -2,6 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <chrono>
 
 template<typename T>
 std::vector<T> SMA(std::vector<T> data, int n) {
@@ -29,12 +30,14 @@ std::vector<T> SMA(std::vector<T> data, int n) {
 
 int main()
 {
+    /*
     std::vector<double> data{ 1, 4, 3, 5, 2, 8, 11 };
     std::vector<double> res = SMA(data,37);
     for (double val : res) {
         std::cout << val << " ";
     }
     std::cout << std::endl;
+    */
 
     std::vector<float> dataFloat;
     std::vector<double> dataDouble;
@@ -60,9 +63,55 @@ int main()
     }
     doubleFile.close();
 
-    
-    for (int i = 0; i < 50; i++) {
-        std::cout << dataFloat[i]  << "\t" << dataDouble[i] << std::endl;
-    }
-    
+    auto start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float4SMA = SMA(dataFloat, 4);
+    auto end_time = std::chrono::high_resolution_clock::now();
+    auto time = end_time - start_time;
+    std::cout << "float n=4: " << time / std::chrono::milliseconds(1)<<std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float8SMA = SMA(dataFloat, 8);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "float n=8: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float16SMA = SMA(dataFloat, 16);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "float n=16: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float32SMA = SMA(dataFloat, 32);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "float n=32: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float64SMA = SMA(dataFloat, 64);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "float n=64: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<float> float128SMA = SMA(dataFloat, 128); end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "float n=128: " << time / std::chrono::milliseconds(1) << std::endl;
+    std::cout << std::endl;
+
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double4SMA = SMA(dataDouble, 4);
+    end_time = std::chrono::high_resolution_clock::now();
+    time = end_time - start_time;
+    std::cout << "double n=4: " << time / std::chrono::milliseconds(1)<<std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double8SMA = SMA(dataDouble, 8);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "double n=8: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double16SMA = SMA(dataDouble, 16);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "double n=16: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double32SMA = SMA(dataDouble, 32);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "double n=32: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double64SMA = SMA(dataDouble, 64);
+    end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "double n=64: " << time / std::chrono::milliseconds(1) << std::endl;
+    start_time = std::chrono::high_resolution_clock::now();
+    std::vector<double> double128SMA = SMA(dataDouble, 128); end_time = std::chrono::high_resolution_clock::now();
+    std::cout << "double n=128: " << time / std::chrono::milliseconds(1) << std::endl;
+
 }
