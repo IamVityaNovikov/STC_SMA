@@ -4,9 +4,12 @@
 #include <vector>
 
 template<typename T>
-void SMA(std::vector<T> data, int n) {
-    if (n > data.size())
-        return;
+std::vector<T> SMA(std::vector<T> data, int n) {
+    std::vector<T> results;
+    if ((n > data.size())||(n<1))
+        return results;
+    int resultSize = data.size() - n + 1;
+    results.reserve(resultSize);
     int t = n - 1;
     T avg = 0;
     T sum = 0;
@@ -14,19 +17,24 @@ void SMA(std::vector<T> data, int n) {
         sum += data[i];
     }
     avg = sum / n;
-    std::cout << avg << std::endl;
+    results.push_back(avg);
     t++;
     while (t < data.size()) {
         avg = avg + (data[t] - data[t - n]) / n;
-        std::cout << avg << std::endl;
+        results.push_back(avg);
         t++;
     }
+    return results;
 }
 
 int main()
 {
     std::vector<double> data{ 1, 4, 3, 5, 2, 8, 11 };
-    SMA(data, 3);
+    std::vector<double> res = SMA(data,37);
+    for (double val : res) {
+        std::cout << val << " ";
+    }
+    std::cout << std::endl;
 
     std::vector<float> dataFloat;
     std::vector<double> dataDouble;
@@ -52,7 +60,9 @@ int main()
     }
     doubleFile.close();
 
+    
     for (int i = 0; i < 50; i++) {
         std::cout << dataFloat[i]  << "\t" << dataDouble[i] << std::endl;
     }
+    
 }
