@@ -53,6 +53,13 @@ int main()
     }
     floarFile.close();
 
+    std::vector<float> tempFloat;
+    tempFloat = dataFloat;
+    for (int i = 0; i < 99; i++) {
+        dataFloat.insert(dataFloat.end(), tempFloat.begin(), tempFloat.end());
+    }
+    std::cout<<"float data size: " << dataFloat.size() << std::endl;
+
     std::ifstream doubleFile("double1000000.bin", std::ios::binary);
     double doubleBuffer;
     doubleFile.read(reinterpret_cast<char*>(&sampleSize), sizeof(int));
@@ -62,6 +69,15 @@ int main()
         dataDouble.push_back(doubleBuffer);
     }
     doubleFile.close();
+
+
+    std::vector<double> tempDouble;
+    tempDouble = dataDouble;
+    for (int i = 0; i < 99; i++) {
+        dataDouble.insert(dataDouble.end(), tempDouble.begin(), tempDouble.end());
+    }
+    std::cout << "double data size: " << dataDouble.size() << std::endl;
+
 
     auto start_time = std::chrono::high_resolution_clock::now();
     std::vector<float> float4SMA = SMA(dataFloat, 4);
