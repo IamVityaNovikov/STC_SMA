@@ -1,5 +1,6 @@
 ﻿
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 template<typename T>
@@ -26,4 +27,32 @@ int main()
 {
     std::vector<double> data{ 1, 4, 3, 5, 2, 8, 11 };
     SMA(data, 3);
+
+    std::vector<float> dataFloat;
+    std::vector<double> dataDouble;
+
+    std::ifstream floarFile("float1000000.bin", std::ios::binary);
+    int sampleSize;
+    float floatBuffer;
+    floarFile.read(reinterpret_cast<char*>(&sampleSize), sizeof(int));
+    for (size_t i = 0; i < sampleSize; i++) {
+        floarFile.read(reinterpret_cast<char*>(&floatBuffer), sizeof(float));
+
+        dataFloat.push_back(floatBuffer);
+    }
+    floarFile.close();
+
+    std::ifstream doubleFile("double1000000.bin", std::ios::binary);
+    double doubleBuffer;
+    doubleFile.read(reinterpret_cast<char*>(&sampleSize), sizeof(int));
+    for (size_t i = 0; i < sampleSize; i++) {
+        doubleFile.read(reinterpret_cast<char*>(&doubleBuffer), sizeof(double));
+
+        dataDouble.push_back(doubleBuffer);
+    }
+    doubleFile.close();
+
+    for (int i = 0; i < 50; i++) {
+        std::cout << dataFloat[i]  << "\t" << dataDouble[i] << std::endl;
+    }
 }
